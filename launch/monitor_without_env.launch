@@ -1,0 +1,108 @@
+<launch>
+
+  <!-- WPR server -->
+  <node name="wpr_server_node" pkg="wpr_warehousing_monitor" type="wpr_server_node" output="screen"/>
+
+  <!-- environment -->
+  <!-- <group ns="environment">
+    <param name="tf_prefix" value="environment"></param>
+    <arg name="model" default="$(find wpr_warehousing_monitor)/urdf/environment.urdf"/>
+    <arg name="gui" default="false" />
+    <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
+    <param name="use_gui" value="$(arg gui)"/>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+  </group> -->
+
+
+  <!-- racks -->
+  <group ns="rack_1">
+    <param name="tf_prefix" value="rack_1"></param>
+    <arg name="model" default="$(find wpr_warehousing_monitor)/urdf/4x10.urdf"/>
+    <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+  </group>
+  <group ns="rack_2">
+    <param name="tf_prefix" value="rack_2"></param>
+    <arg name="model" default="$(find wpr_warehousing_monitor)/urdf/4x10.urdf"/>
+    <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+  </group>
+  <group ns="rack_3">
+    <param name="tf_prefix" value="rack_3"></param>
+    <arg name="model" default="$(find wpr_warehousing_monitor)/urdf/4x10.urdf"/>
+    <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+  </group>
+  <group ns="rack_4">
+    <param name="tf_prefix" value="rack_4"></param>
+    <arg name="model" default="$(find wpr_warehousing_monitor)/urdf/4x10.urdf"/>
+    <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
+  </group>
+
+  <!-- Robots -->
+  <group ns="wpr1_1">
+    <param name="tf_prefix" value="wpr1_1"></param>
+    <arg name="model" default="$(find wpr_warehousing_monitor)/urdf/wpr1.urdf"/>
+    <arg name="gui" default="false" />
+    <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
+    <param name="use_gui" value="$(arg gui)"/>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+  </group>
+
+  <group ns="wpr1_2">
+    <param name="tf_prefix" value="wpr1_2"></param>
+    <arg name="model" default="$(find wpr_warehousing_monitor)/urdf/wpr1.urdf"/>
+    <arg name="gui" default="false" />
+    <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
+    <param name="use_gui" value="$(arg gui)"/>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+  </group>
+
+  <group ns="wpv3_3">
+    <param name="tf_prefix" value="wpv3_3"></param>
+    <arg name="model" default="$(find wpr_warehousing_monitor)/urdf/wpv3_rack.urdf"/>
+    <arg name="gui" default="false" />
+    <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
+    <param name="use_gui" value="$(arg gui)"/>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+  </group>
+
+  <group ns="wpv3_4">
+    <param name="tf_prefix" value="wpv3_4"></param>
+    <arg name="model" default="$(find wpr_warehousing_monitor)/urdf/wpv3_rack.urdf"/>
+    <arg name="gui" default="false" />
+    <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
+    <param name="use_gui" value="$(arg gui)"/>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+  </group>
+
+<group ns="wpb_home_5">
+    <param name="tf_prefix" value="wpb_home_5"></param>
+    <arg name="model" default="$(find wpr_warehousing_monitor)/urdf/wpb_home.urdf"/>
+    <arg name="gui" default="false" />
+    <param name="robot_description" command="$(find xacro)/xacro $(arg model)" />
+    <param name="use_gui" value="$(arg gui)"/>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+  </group>
+
+  <!-- Map server -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(find wpr_warehousing_monitor)/maps/map.yaml"/>
+  
+  <!-- Map tools  -->
+  <node pkg="waterplus_map_tools" type="wp_manager" name="wp_manager" output="screen" />
+
+  <!-- Teleop robot -->
+  <!-- <node name="robot_teleop_joystick" pkg="wpr_warehousing_monitor" type="robot_teleop_joystick" /> -->
+
+  <!-- Joystick node -->
+  <!-- <node respawn="true" pkg="joy" type="joy_node" name="wpr_joy_node" >
+    <param name="dev" type="string" value="/dev/input/js0" />
+    <param name="deadzone" value="0.12" />
+  </node> -->
+
+  <!-- Rviz -->
+  <arg name="rvizconfig" default="$(find wpr_warehousing_monitor)/rviz/monitor.rviz" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(arg rvizconfig)" required="true" />
+
+</launch>

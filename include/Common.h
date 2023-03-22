@@ -1,0 +1,6 @@
+#ifndef WPR_WAREHOUSING_COMMON_H
+#define WPR_WAREHOUSING_COMMON_H
+
+#define ROBOT_NUM       7
+
+#endif
